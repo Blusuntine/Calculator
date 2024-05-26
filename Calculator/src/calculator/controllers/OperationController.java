@@ -109,6 +109,7 @@ public class OperationController {
         return new Response("Substraction done correctly: " + formattedResult, Status.OK);
 
     }
+
     //Tercer método para la calculadora, la multiplicación
     public static Response multiplyOperation(String number1, String number2, String operator, String result) {
 
@@ -145,6 +146,7 @@ public class OperationController {
         return new Response("Multiplication done correctly: " + formattedResult, Status.OK);
 
     }
+
     //Cuarto método para la calculadora, la división
     public static Response divideOperation(String number1, String number2, String operator, String result) {
         if (number1 == null || number1.trim().isEmpty()) {
@@ -180,6 +182,7 @@ public class OperationController {
         return new Response("Division done correctly: " + formattedResult, Status.OK);
 
     }
+
     //Quinto método para la calculadora, la potenciación
     public static Response potencyOperation(String number1, String number2, String operator, String result) {
         if (number1 == null || number1.trim().isEmpty()) {
@@ -213,17 +216,8 @@ public class OperationController {
         String formattedResult = formatToThreeDecimalPlaces(doubleResult);
 
         return new Response("Potentiation done correctly: " + formattedResult, Status.OK);
-        
+
     }
 
-    private static History history = new History();
-
-    public static ArrayList<Operation> getOperationHistory() {
-        ArrayList<Operation> operations = history.getOperations();
-        Collections.reverse(operations);
-        return operations;
-    }
-    //Me acabo de dar cuenta que es posible que tenga que añadir
-    //el Single Responsability Principle aqui
-    //Pero subiré todo con el MVC primero
+  
 }

@@ -10,6 +10,7 @@ import calculator.models.History;
 import calculator.models.Calculator;
 import calculator.models.Operation;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -52,7 +53,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        updateHistoryList = new javax.swing.JList<>();
         resultTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,9 +135,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Result");
 
-        jList1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jList1.setEnabled(false);
-        jScrollPane1.setViewportView(jList1);
+        updateHistoryList.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        updateHistoryList.setEnabled(false);
+        jScrollPane1.setViewportView(updateHistoryList);
 
         resultTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         resultTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -391,15 +392,15 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void updateHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateHistoryButtonActionPerformed
         // TODO add your handling code here:
-        ArrayList<Operation> operationHistory = OperationController.getOperationHistory();
+        ArrayList<Operation> operationHistory = this.history.getOperations();
+        Collections.reverse(this.history.getOperations());
 
-        DefaultListModel<String> model = new DefaultListModel<>();
-        for (Operation operation : operationHistory) {
-            model.addElement(operation.toString());
-        }
-        jList1.setModel(model);
+        DefaultListModel model = new DefaultListModel();
+        model.addAll(operationHistory);
+        updateHistoryList.setModel(model);
+
     }//GEN-LAST:event_updateHistoryButtonActionPerformed
-
+    //no tengo ni la más mínima idea de como esto llegó aquí
     private void number1TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number1TextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_number1TextFieldActionPerformed
@@ -413,7 +414,6 @@ public class CalculatorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton multiplyButton;
     private javax.swing.JTextField number1TextField;
@@ -422,5 +422,6 @@ public class CalculatorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField resultTextField;
     private javax.swing.JButton substractButton;
     private javax.swing.JButton updateHistoryButton;
+    private javax.swing.JList<String> updateHistoryList;
     // End of variables declaration//GEN-END:variables
 }
