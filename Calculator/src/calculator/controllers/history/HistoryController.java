@@ -12,7 +12,7 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author HP
+ * @author HP aka Camilo Morales
  */
 public class HistoryController {
     

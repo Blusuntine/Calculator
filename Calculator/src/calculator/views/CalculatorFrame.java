@@ -10,8 +10,6 @@ import calculator.controllers.utils.Response;
 import calculator.models.History;
 import calculator.models.Calculator;
 import calculator.models.Operation;
-import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 

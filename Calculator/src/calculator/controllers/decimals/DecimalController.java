@@ -6,7 +6,7 @@ package calculator.controllers.decimals;
 
 /**
  *
- * @author HP
+ * @author HP aka Camilo Morales
  */
 public class DecimalController {
     

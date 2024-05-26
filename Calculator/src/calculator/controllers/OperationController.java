@@ -8,7 +8,6 @@ import calculator.controllers.utils.Response;
 import calculator.controllers.utils.Status;
 import calculator.controllers.decimals.DecimalController;
 
-
 /**
  *
  * @author HP aka Camilo Morales
