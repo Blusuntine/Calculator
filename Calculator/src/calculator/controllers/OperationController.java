@@ -6,10 +6,8 @@ package calculator.controllers;
 
 import calculator.controllers.utils.Response;
 import calculator.controllers.utils.Status;
-import calculator.models.History;
-import calculator.models.Operation;
-import java.util.ArrayList;
-import java.util.Collections;
+import calculator.controllers.decimals.DecimalController;
+
 
 /**
  *
@@ -17,19 +15,7 @@ import java.util.Collections;
  */
 public class OperationController {
 
-    //metodo para verificar q tenga 3 o mas decimales
-    private static boolean hasAtMostThreeDecimalPlaces(String number) {
-        if (number.contains(".")) {
-            String[] parts = number.split("\\.");
-            return parts[1].length() <= 3;
-        }
-        return true;
-    }
-
-    //Metodo para formatear el número y que solo tenga 3 decimales
-    private static String formatToThreeDecimalPlaces(double number) {
-        return String.format("%.3f", number);
-    }
+    
 
     //Primer metodo para la calculadora, la suma
     public static Response addOperation(String number1, String number2, String operator, String result) {
@@ -57,16 +43,16 @@ public class OperationController {
         }
 
         //Se verifica si el número tiene más de 3 decimales
-        if (!hasAtMostThreeDecimalPlaces(number1)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number1)) {
             return new Response("Number 1 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
-        if (!hasAtMostThreeDecimalPlaces(number2)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number2)) {
             return new Response("Number 2 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
 
         double doubleResult = doubleNumber1 + doubleNumber2;
 
-        String formattedResult = formatToThreeDecimalPlaces(doubleResult);
+        String formattedResult = DecimalController.formatToThreeDecimalPlaces(doubleResult);
 
         return new Response("Addition done correctly: " + formattedResult, Status.OK);
 
@@ -95,16 +81,16 @@ public class OperationController {
             return new Response("Number 2 must be numeric", Status.BAD_REQUEST);
         }
 
-        if (!hasAtMostThreeDecimalPlaces(number1)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number1)) {
             return new Response("Number 1 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
-        if (!hasAtMostThreeDecimalPlaces(number2)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number2)) {
             return new Response("Number 2 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
 
         double doubleResult = doubleNumber1 - doubleNumber2;
 
-        String formattedResult = formatToThreeDecimalPlaces(doubleResult);
+        String formattedResult = DecimalController.formatToThreeDecimalPlaces(doubleResult);
 
         return new Response("Substraction done correctly: " + formattedResult, Status.OK);
 
@@ -132,16 +118,16 @@ public class OperationController {
             return new Response("Number 2 must be numeric", Status.BAD_REQUEST);
         }
 
-        if (!hasAtMostThreeDecimalPlaces(number1)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number1)) {
             return new Response("Number 1 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
-        if (!hasAtMostThreeDecimalPlaces(number2)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number2)) {
             return new Response("Number 2 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
 
         double doubleResult = doubleNumber1 * doubleNumber2;
 
-        String formattedResult = formatToThreeDecimalPlaces(doubleResult);
+        String formattedResult = DecimalController.formatToThreeDecimalPlaces(doubleResult);
 
         return new Response("Multiplication done correctly: " + formattedResult, Status.OK);
 
@@ -168,16 +154,16 @@ public class OperationController {
             return new Response("Number 2 must be numeric", Status.BAD_REQUEST);
         }
 
-        if (!hasAtMostThreeDecimalPlaces(number1)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number1)) {
             return new Response("Number 1 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
-        if (!hasAtMostThreeDecimalPlaces(number2)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number2)) {
             return new Response("Number 2 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
 
         double doubleResult = doubleNumber1 / doubleNumber2;
 
-        String formattedResult = formatToThreeDecimalPlaces(doubleResult);
+        String formattedResult = DecimalController.formatToThreeDecimalPlaces(doubleResult);
 
         return new Response("Division done correctly: " + formattedResult, Status.OK);
 
@@ -204,16 +190,16 @@ public class OperationController {
             return new Response("Number 2 must be numeric", Status.BAD_REQUEST);
         }
 
-        if (!hasAtMostThreeDecimalPlaces(number1)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number1)) {
             return new Response("Number 1 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
-        if (!hasAtMostThreeDecimalPlaces(number2)) {
+        if (!DecimalController.hasAtMostThreeDecimalPlaces(number2)) {
             return new Response("Number 2 must have at most 3 decimal places", Status.BAD_REQUEST);
         }
 
         double doubleResult = Math.pow(doubleNumber1, doubleNumber2);
 
-        String formattedResult = formatToThreeDecimalPlaces(doubleResult);
+        String formattedResult = DecimalController.formatToThreeDecimalPlaces(doubleResult);
 
         return new Response("Potentiation done correctly: " + formattedResult, Status.OK);
 

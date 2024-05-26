@@ -5,6 +5,7 @@
 package calculator.views;
 
 import calculator.controllers.OperationController;
+import calculator.controllers.history.HistoryController;
 import calculator.controllers.utils.Response;
 import calculator.models.History;
 import calculator.models.Calculator;
@@ -21,12 +22,14 @@ import javax.swing.JOptionPane;
 public class CalculatorFrame extends javax.swing.JFrame {
 
     private History history;
+    private HistoryController historyController;
 
     /**
      * Creates new form Calculator
      */
     public CalculatorFrame() {
         this.history = new History();
+        historyController = new HistoryController(history);
         initComponents();
     }
 
@@ -246,7 +249,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 double number2 = Double.parseDouble(number2Str);
                 double resultDouble = calculator.add(number1, number2);
 
-                this.history.addOperation(new Operation(number1, number2, operator, resultDouble));
+                history.addOperation(new Operation(number1, number2, operator, resultDouble));
+                
             }
         }
         JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
@@ -280,7 +284,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 double number2 = Double.parseDouble(number2Str);
                 double resultDouble = calculator.subtract(number1, number2);
 
-                this.history.addOperation(new Operation(number1, number2, operator, resultDouble));
+                history.addOperation(new Operation(number1, number2, operator, resultDouble));
             }
         }
         JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
@@ -313,7 +317,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 double number2 = Double.parseDouble(number2Str);
                 double resultDouble = calculator.multiply(number1, number2);
 
-                this.history.addOperation(new Operation(number1, number2, operator, resultDouble));
+                history.addOperation(new Operation(number1, number2, operator, resultDouble));
             }
         }
         JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
@@ -345,7 +349,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 double number2 = Double.parseDouble(number2Str);
                 double resultDouble = calculator.divide(number1, number2);
 
-                this.history.addOperation(new Operation(number1, number2, operator, resultDouble));
+                history.addOperation(new Operation(number1, number2, operator, resultDouble));
             }
         }
         JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
@@ -377,7 +381,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 double number2 = Double.parseDouble(number2Str);
                 double resultDouble = calculator.potency(number1, number2);
 
-                this.history.addOperation(new Operation(number1, number2, operator, resultDouble));
+                history.addOperation(new Operation(number1, number2, operator, resultDouble));
             }
         }
         JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
@@ -392,12 +396,12 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void updateHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateHistoryButtonActionPerformed
         // TODO add your handling code here:
-        ArrayList<Operation> operationHistory = this.history.getOperations();
-        Collections.reverse(this.history.getOperations());
-
-        DefaultListModel model = new DefaultListModel();
-        model.addAll(operationHistory);
-        updateHistoryList.setModel(model);
+        try {
+            DefaultListModel<String> model = historyController.getHistoryModel();
+            updateHistoryList.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error updating history: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_updateHistoryButtonActionPerformed
     //no tengo ni la más mínima idea de como esto llegó aquí

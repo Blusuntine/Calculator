@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * @author edangulo
  */
 public class History {
-    
+
     private ArrayList<Operation> operations;
 
     public History() {
         this.operations = new ArrayList<>();
     }
-    
+
     public void addOperation(Operation operation) {
         this.operations.add(operation);
     }
@@ -25,8 +25,5 @@ public class History {
     public ArrayList<Operation> getOperations() {
         return operations;
     }
-    
-    //es probable que tenga que añadir lo del Single
-    //Responsability Principle aqui
-    
+
 }
